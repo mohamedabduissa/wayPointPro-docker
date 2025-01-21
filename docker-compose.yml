@@ -1,0 +1,14 @@
+version: '3.0'
+
+services:
+  osrm:
+    image: osrm/osrm-backend:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../custom_files:/data
+    command: >
+      osrm-routed --algorithm mld /data/gcc-states-latest.osrm
+    environment:
+      - OSRM_PROFILE=/opt/car.lua
+      - OSRM_DATA=/data/gcc-states-latest.osm.pbf
